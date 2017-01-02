@@ -8,39 +8,35 @@ struct node {
 //for creation
 struct node* createnode(int key){
 	struct node *newnode = (struct node*) malloc(sizeof(struct node));
-	newnode -> key = key;
-	newnode -> next = NULL;
+	newnode->key = key;
+	newnode->next = NULL;
 	return newnode;
 }
 
 //for traversal
 void display(struct node* temp){
 	struct node* head = temp;
-	while(head->next != NULL){
+	while(head != NULL){
 		printf("%d\n", head->key);
 		head = head->next;
 	}
 }
 
 //for insertion at the end
-int insertion(struct node* head, int key){
-	if(head == NULL){
-		head = createnode(key);
-		return 1;	
+int insertion(struct node** head, int key){
+	if(*head == NULL){
+		*head = createnode(key);
+		return 1;
 	}
-	else{
-		printf("->%d", head->key);
-		insertion(head->next, key);
-	}
+	else
+		insertion(&(*head)->next, key);
 }
 
 int main(){
-	struct node* head, *temp ;
-	head = NULL;
-	temp = head;
+	struct node *head = NULL;
 	
 	while(1){
-		int choice, value;
+		int choice, value, result;
 
 		printf("\n1.Insertion\n2.Traversal\n3.Exit\nEnter : ");
 		scanf("%d", &choice);
@@ -50,12 +46,13 @@ int main(){
 			case 1: 
 			printf("\nEnter value : ");
 			scanf("%d",&value);
-			if(insertion(temp, value))
-				printf("\nSuccessful");
+			if(result = insertion(&head,value))
+				printf("\nSuccess");
 			break;
 
 			case 2:
 			display(head);
+
 			break;
 
 			case 3:
@@ -64,7 +61,7 @@ int main(){
 		}
 	}
 
-	free(temp);
+	//releasing the resources
 	free(head);
 	return 0;
 }
