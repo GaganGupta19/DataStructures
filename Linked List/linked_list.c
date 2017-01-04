@@ -23,51 +23,58 @@ void display(struct node* temp){
 }
 
 //for insertion at the end
-int insertion(struct node** head, int key, int position){
+int insertion(struct node** temp, int key, int position){
+	struct node *head = *temp;
 	struct node *tempnode = createnode(key);
-	if(*head == NULL){
-		*head = tempnode;
+	if(head == NULL){
+		head = tempnode;
 		return 1;
 	}
 	else if(position == 0){
-		tempnode -> next = *head;
-		*head = tempnode;
+		tempnode -> next = head;
+		head = tempnode;
 		return 1;
 	}
 	else if(position == -1){
-		while((*head) -> next != NULL)
-			*head = (*head) -> next;
-		(*head) -> next = tempnode;
+		while(head -> next != NULL){
+			printf("%d", head -> key);
+			head = head -> next;
+		}
+		head -> next = tempnode;
 		return 1;
 	}
 	else{
 		int count = 1;
-		while((*head) -> next != NULL && count != position){
+		struct node *prev;
+		while(head -> next != NULL && count < position){
 			count++;
-			*head = (*head) -> next;
+			prev = head;
+			head = head -> next;
 		}
-		if((*head) -> next == NULL)
-			(*head) -> next = tempnode;
-		else{
-			struct node *temp = (*head) -> next;
-			(*head) -> next = tempnode;
-			tempnode -> next = temp;
-			return 1;
-		}
+
+		tempnode -> next = head;
+		prev -> next = tempnode;
+		return 1;
 	}
+	
+}
+
+// function for deletion of nodes
+int delete(){
+
 }
 
 int main(){
 	struct node *head = NULL;
-	
+
 	while(1){
 		int choice, value, result, position;
 
-		printf("\n1.Insertion at end\n2.Insertion at front\n3.Insertion at a specific location\n4.Traversal\n5.Exit\nEnter : ");
+		printf("\n1.Insertion at front\n2.Insertion at end\n3.Insertion at a specific location\n4.Deletion from end\n5.Deletion from front\n6.Deletion from between\n7.Traversal\n8.Exit\nEnter : ");
 		scanf("%d", &choice);
-		
+
 		switch(choice){
-			
+
 			case 1: 
 			printf("\nEnter value : ");
 			scanf("%d",&value);
@@ -92,11 +99,25 @@ int main(){
 			break;
 			
 			case 4:
-			display(head);
 			break;
 
 			case 5:
+			break;
+
+			case 6:
+			break;
+
+
+			case 7:
+			display(head);
+			break;
+
+			case 8:
 			return -1;
+			break;
+
+			default:
+			printf("\nEnter your choice again!");
 			break;
 		}
 	}
