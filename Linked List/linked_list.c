@@ -23,36 +23,35 @@ void display(struct node* temp){
 }
 
 //for insertion at the end
-int insertion(struct node** temp, int key, int position){
-	struct node *head = *temp;
+int insertion(struct node** head, int key, int position){
 	struct node *tempnode = createnode(key);
-	if(head == NULL){
-		head = tempnode;
-		return 1;
+	if(*head == NULL){
+		(*head) = tempnode;
+		return 5;
 	}
 	else if(position == 0){
-		tempnode -> next = head;
-		head = tempnode;
+		tempnode -> next = *head;
+		(*head) = tempnode;
 		return 1;
 	}
 	else if(position == -1){
-		while(head -> next != NULL){
-			printf("%d", head -> key);
-			head = head -> next;
-		}
-		head -> next = tempnode;
+		struct node *temp = *head;
+		while(temp -> next != NULL)
+			temp = temp -> next;
+		temp -> next = tempnode;
 		return 1;
 	}
 	else{
 		int count = 1;
-		struct node *prev;
-		while(head -> next != NULL && count < position){
+		struct node *prev, *temp;
+		temp = *head;
+		while(temp -> next != NULL && count < position){
 			count++;
-			prev = head;
-			head = head -> next;
+			prev = temp;
+			temp = temp -> next;
 		}
 
-		tempnode -> next = head;
+		tempnode -> next = temp;
 		prev -> next = tempnode;
 		return 1;
 	}
@@ -65,11 +64,15 @@ int delete(){
 }
 
 int main(){
-	struct node *head = NULL;
+	int choice, value, result, position;
+	struct node *head = NULL, **head_ptr;
+	head_ptr = &head;
 
 	while(1){
-		int choice, value, result, position;
 
+		head = (*head_ptr);
+		if (head != NULL)
+			printf("\n First node : %d", head -> key );
 		printf("\n1.Insertion at front\n2.Insertion at end\n3.Insertion at a specific location\n4.Deletion from end\n5.Deletion from front\n6.Deletion from between\n7.Traversal\n8.Exit\nEnter : ");
 		scanf("%d", &choice);
 
@@ -78,8 +81,7 @@ int main(){
 			case 1: 
 			printf("\nEnter value : ");
 			scanf("%d",&value);
-			if(result = insertion(&head, value, 0))
-				printf("\nSuccess");
+			insertion(&head, value, 0) == 5 ? printf("\nnull insertion") : printf("\nSuccess");
 			break;
 
 			case 2:
