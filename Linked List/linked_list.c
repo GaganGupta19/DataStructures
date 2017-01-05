@@ -16,7 +16,7 @@ struct node* createnode(int key){
 //for traversal
 void display(struct node* temp){
 	struct node* head = temp;
-	while(head != NULL){
+	while(head){
 		printf("%d\n", head -> key);
 		head = head -> next;
 	}
@@ -25,27 +25,31 @@ void display(struct node* temp){
 //for insertion at the end
 int insertion(struct node** head, int key, int position){
 	struct node *tempnode = createnode(key);
-	if(*head == NULL){
+	//for initial node
+	if(!(*head)){
 		(*head) = tempnode;
-		return 5;
+		return 1;
 	}
+	//insertion at head
 	else if(position == 0){
 		tempnode -> next = *head;
 		(*head) = tempnode;
 		return 1;
 	}
+	//insertion at end
 	else if(position == -1){
 		struct node *temp = *head;
-		while(temp -> next != NULL)
+		while(temp -> next)
 			temp = temp -> next;
 		temp -> next = tempnode;
 		return 1;
 	}
+	//insertion in between
 	else{
 		int count = 1;
 		struct node *prev, *temp;
 		temp = *head;
-		while(temp -> next != NULL && count < position){
+		while((temp -> next) && count < position){
 			count++;
 			prev = temp;
 			temp = temp -> next;
@@ -61,7 +65,7 @@ int insertion(struct node** head, int key, int position){
 // function for deletion of nodes
 int deletion(struct node** head, int position){
 
-	if(*head == NULL)
+	if(!(*head))
 		return -1;
 	//deletion from head
 	else if(position == 0){
@@ -74,7 +78,7 @@ int deletion(struct node** head, int position){
 	//deletion from end
 	else if(position == -1){
 		struct node* temp = (*head), *prev;
-		while(temp -> next != NULL){
+		while(temp -> next){
 			prev = temp;
 			temp = temp -> next;
 		}
@@ -82,10 +86,11 @@ int deletion(struct node** head, int position){
 		free(temp);
 		return 1;
 	}
+	//deletion in between
 	else{
 		struct node* temp = (*head), *prev;
 		int count = 1;
-		while(temp -> next != NULL && count < position){
+		while((temp -> next) && count < position){
 			count++;
 			prev = temp;
 			temp = temp -> next;
@@ -97,6 +102,7 @@ int deletion(struct node** head, int position){
 	}
 }
 
+//search function
 int search(struct node* temp, int key){
 	struct node* head = temp;
 	if(!head)
@@ -127,7 +133,7 @@ int main(){
 			case 1: 
 			printf("\nEnter value : ");
 			scanf("%d",&value);
-			insertion(&head, value, 0) == 5 ? printf("\nnull insertion") : printf("\nSuccess");
+			insertion(&head, value, 0) == 1 ? printf("\nSuccess") : printf("\nFailed");
 			break;
 
 			case 2:
