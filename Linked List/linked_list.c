@@ -59,8 +59,42 @@ int insertion(struct node** head, int key, int position){
 }
 
 // function for deletion of nodes
-int delete(){
+int deletion(struct node** head, int position){
 
+	if(*head == NULL)
+		return -1;
+	//deletion from head
+	else if(position == 0){
+		struct node* temp = (*head);
+		(*head) = (*head) -> next;
+		temp -> next = NULL;
+		free(temp);
+		return 1;
+	}
+	//deletion from end
+	else if(position == -1){
+		struct node* temp = (*head), *prev;
+		while(temp -> next != NULL){
+			prev = temp;
+			temp = temp -> next;
+		}
+		prev -> next = NULL;
+		free(temp);
+		return 1;
+	}
+	else{
+		struct node* temp = (*head), *prev;
+		int count = 1;
+		while(temp -> next != NULL && count < position){
+			count++;
+			prev = temp;
+			temp = temp -> next;
+		}
+		prev -> next = temp -> next;
+		temp -> next = NULL;
+		free(temp);
+		return 1;
+	}
 }
 
 int main(){
@@ -101,12 +135,17 @@ int main(){
 			break;
 			
 			case 4:
+			deletion(&head, -1) == 1 ? printf("\nSuccess" ) : printf("\nFailed" );
 			break;
 
 			case 5:
+			deletion(&head, 0) == 1 ? printf("\nSuccess" ) : printf("\nFailed" );
 			break;
 
 			case 6:
+			printf("\nEnter position : ");
+			scanf("%d",&position);
+			deletion(&head, position) == 1 ? printf("\nSuccess" ) : printf("\nFailed" );
 			break;
 
 
