@@ -97,17 +97,29 @@ int deletion(struct node** head, int position){
 	}
 }
 
+int search(struct node* temp, int key){
+	struct node* head = temp;
+	if(!head)
+		return -1;
+
+	int count = 1;
+	while((head)){
+		if(head -> key == key)
+			return count;
+		head = head -> next;
+		count++;
+	}
+		
+	return -1;
+}
+
 int main(){
 	int choice, value, result, position;
-	struct node *head = NULL, **head_ptr;
-	head_ptr = &head;
+	struct node *head = NULL;
 
 	while(1){
 
-		head = (*head_ptr);
-		if (head != NULL)
-			printf("\n First node : %d", head -> key );
-		printf("\n1.Insertion at front\n2.Insertion at end\n3.Insertion at a specific location\n4.Deletion from end\n5.Deletion from front\n6.Deletion from between\n7.Traversal\n8.Exit\nEnter : ");
+		printf("\n1.Insertion at front\n2.Insertion at end\n3.Insertion at a specific location\n4.Deletion from end\n5.Deletion from front\n6.Deletion from between\n7.Searching\n8.Traversal\n9.Exit\nEnter : ");
 		scanf("%d", &choice);
 
 		switch(choice){
@@ -148,12 +160,18 @@ int main(){
 			deletion(&head, position) == 1 ? printf("\nSuccess" ) : printf("\nFailed" );
 			break;
 
-
 			case 7:
-			display(head);
+			printf("\nEnter value : ");
+			scanf("%d",&value);
+			int position = search(head, value);
+			position > 0 ? printf("\nFound at index : %d", position) : printf("\nFailed" );
 			break;
 
 			case 8:
+			display(head);
+			break;
+
+			case 9:
 			return -1;
 			break;
 
