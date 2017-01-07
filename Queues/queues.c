@@ -35,10 +35,11 @@ int main(){
 		switch(choice){
 			
 			case 1	:
-			printf("\nEnter value : ");
-			scanf("%d", &value);
-			if (is_full(count, size) == 1)
+			if (is_full(count, size) == 1){
+				printf("\nEnter value : ");
+				scanf("%d", &value);
 				insert(&head, value) ? printf("\nSuccess\nLIMIT : %d, CURRENT : %d", size, ++count) : printf("\nFailed");	
+			}
 			else
 				printf("\nLimit reached");
 			break;
@@ -51,7 +52,7 @@ int main(){
 			break;
 			
 			case 3	:
-			display(head);
+			head ?	display(head) : printf("\nEmpty");
 			break;			
 			
 			case 4	:
