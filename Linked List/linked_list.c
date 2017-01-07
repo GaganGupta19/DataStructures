@@ -178,6 +178,8 @@ int main(){
 			break;
 
 			case 9:
+			//releasing the resources
+			free(head);
 			return -1;
 			break;
 
@@ -186,8 +188,5 @@ int main(){
 			break;
 		}
 	}
-
-	//releasing the resources
-	free(head);
 	return 0;
 }

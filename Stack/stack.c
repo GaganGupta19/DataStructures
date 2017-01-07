@@ -55,6 +55,8 @@ int main(){
 			break;			
 			
 			case 4	:
+			//releasing the resources
+			free(head);			
 			return -1;
 			break;
 
