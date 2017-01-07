@@ -3,11 +3,11 @@
 #include "linked_list.h"
 
 int is_empty(struct node* head){
-	if (head == NULL) return 1; return -1;
+	if (head != NULL) return 1; return -1;
 }
 
 int is_full(int count, int limit){
-	if (count == limit) return 1; else return -1;
+	if (count != limit) return 1; else return -1;
 }
 
 int push(struct node** head, int key){
@@ -37,12 +37,17 @@ int main(){
 			case 1	:
 			printf("\nEnter value : ");
 			scanf("%d", &value);
-			is_full(count, size) ? printf("yes") : printf("no");
-			push(&head, value) ? printf("\nSuccess\nLIMIT : %d, CURRENT : %d", size, ++count) : printf("\nFailed");	
+			if (is_full(count, size) == 1)
+				push(&head, value) ? printf("\nSuccess\nLIMIT : %d, CURRENT : %d", size, ++count) : printf("\nFailed");	
+			else
+				printf("\nLimit reached");
 			break;
 			
 			case 2	:
-			pop(&head) ? printf("\nSuccess") : printf("\nFailed");
+			if (is_empty(head) == 1)
+				pop(&head) ? printf("\nSuccess\nLIMIT : %d, CURRENT : %d", size, --count) : printf("\nFailed");
+			else
+				printf("\nAlready empty");
 			break;
 			
 			case 3	:
