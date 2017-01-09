@@ -119,13 +119,27 @@ int search(struct node* temp, int key){
 	return -1;
 }
 
+//middle element
+void find_mid(struct node* head){
+	struct node *slow, *fast;
+	slow = fast = head;
+	int count = 1;
+	while(fast->next->next != NULL){
+		count++;
+		printf("\nhello");
+		slow = slow -> next;
+		fast = fast -> next -> next;
+	} 
+	printf("\n%d found at position %d", slow->key, count);
+}
+
 int main(){
 	int choice, value, result, position;
 	struct node *head = NULL;
 
 	while(1){
 
-		printf("\n1.Insertion at front\n2.Insertion at end\n3.Insertion at a specific location\n4.Deletion from end\n5.Deletion from front\n6.Deletion from between\n7.Searching\n8.Traversal\n9.Exit\nEnter : ");
+		printf("\n1.Insertion at front\n2.Insertion at end\n3.Insertion at a specific location\n4.Deletion from end\n5.Deletion from front\n6.Deletion from between\n7.Searching\n8.Find middle element\n9.Display\n10.Exit\nEnter : ");
 		scanf("%d", &choice);
 
 		switch(choice){
@@ -174,10 +188,14 @@ int main(){
 			break;
 
 			case 8:
-			display(head);
+			find_mid(head);
 			break;
 
 			case 9:
+			display(head);
+			break;
+
+			case 10:
 			//releasing the resources
 			free(head);
 			return -1;
