@@ -123,12 +123,18 @@ int search(struct node* temp, int key){
 void find_mid(struct node* head){
 	struct node *slow, *fast;
 	slow = fast = head;
-	int count = 1;
-	while(fast->next->next != NULL){
-		count++;
-		printf("\nhello");
-		slow = slow -> next;
-		fast = fast -> next -> next;
+	int count = 1, i = 0;
+	while(fast->next){
+		if(i == 0){
+			fast = fast -> next;
+			i = 1;
+		}
+		else if(i == 1){
+			slow = slow -> next;
+			fast = fast -> next;
+			i = 0;
+			count++;
+		}
 	} 
 	printf("\n%d found at position %d", slow->key, count);
 }
