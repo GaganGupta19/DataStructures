@@ -1,5 +1,3 @@
-#include<stdio.h>
-#include<stdlib.h>
 #include "linked_list.h"
 
 int is_empty(struct node* head){
