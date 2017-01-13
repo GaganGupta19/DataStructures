@@ -2,8 +2,8 @@
 Problem to solve
 
 	1 -> 2 -> 3 -> 4 -> 5 -> 11 -> 6 -> 7 
-							/
-			8 -> 2 -> 3 -> 4 	
+							
+	8 -> 2 -> 3 -> 4 -> (joining with 11) 	
 
 finding the intersecting node
 */
