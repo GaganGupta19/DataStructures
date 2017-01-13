@@ -15,7 +15,6 @@ int detect_loop(struct node* head){
 			slow = slow -> next;
 			fast = fast -> next;
 			i = 0;
-			//count++;
 		}
 	} 
 	return 1;
@@ -25,26 +24,23 @@ void find_starting_point_of_loop(struct node* head){
 	struct node *slow, *fast;
 	slow = fast = head;
 	int i = 0;
-	while(slow != fast){
-		if(i == 0){
-			fast = fast -> next;
-			i = 1;		
-		}		
-		else if(i == 1){
-			slow = slow -> next;
-			fast = fast -> next;
-			i = 0;
+	while(slow && fast && fast->next){
+		slow = slow -> next;
+		fast = fast -> next -> next;
+		if(slow == fast){
+			i = 1;
+			break;
 		}
 	}
-	slow = head;
-	fast = fast -> next;
-	while(slow != fast){
-		printf("\nloop started at : %d", slow->key);
-		slow = slow -> next;
-		fast = fast -> next;
-	}	
-	printf("\nloop started at : %d", slow->key);
-	 	
+	if(i){
+		slow = head;
+		while(slow != fast){
+			fast = fast -> next;
+			slow = slow -> next;
+		}
+
+	}
+	printf("\nloop started at : %d\n", slow->key);
 }
 
 int main(){
