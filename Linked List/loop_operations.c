@@ -21,6 +21,32 @@ int detect_loop(struct node* head){
 	return 1;
 }
 
+void find_starting_point_of_loop(struct node* head){
+	struct node *slow, *fast;
+	slow = fast = head;
+	int i = 0;
+	while(slow != fast){
+		if(i == 0){
+			fast = fast -> next;
+			i = 1;		
+		}		
+		else if(i == 1){
+			slow = slow -> next;
+			fast = fast -> next;
+			i = 0;
+		}
+	}
+	slow = head;
+	fast = fast -> next;
+	while(slow != fast){
+		printf("\nloop started at : %d", slow->key);
+		slow = slow -> next;
+		fast = fast -> next;
+	}	
+	printf("\nloop started at : %d", slow->key);
+	 	
+}
+
 int main(){
 	struct node* head;
 	head = createnode(1);
@@ -35,6 +61,8 @@ int main(){
 	head -> next -> next -> next -> next -> next -> next -> next = junction;
 	//display(head);
 	detect_loop(head) == 1 ? printf("\nIt contains a loop") : printf("\nIt doesn't contains a loop");	
+	//finding start of loop
+	find_starting_point_of_loop(head);
 	//releasing memory
 	free(head);
 }
