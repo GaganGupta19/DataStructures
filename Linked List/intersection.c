@@ -8,6 +8,12 @@ Problem to solve
 finding the intersecting node
 */
 
+/*
+1. Find the length of both lists
+2. Find the difference of lengths of both lists
+3. Traverse the longest list till the difference calculated
+4. Traverse both the lists till they point to the same node
+*/
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
