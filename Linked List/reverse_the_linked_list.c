@@ -22,9 +22,10 @@ int main(){
 	head -> next -> next = createnode(3);
 	head -> next -> next -> next = createnode(4);
 	head -> next -> next -> next -> next = createnode(5);
-	printf("\nBefore\n");
+	printf("Before\n");
 	display(head);	
 	printf("\nAfter\n");
 	display(reverse_list(head));
 	free(head);
+	return 0;
 }
