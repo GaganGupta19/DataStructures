@@ -23,11 +23,12 @@ int separate_even_odds(struct node* head){
 			else{
 				if(odd_list == NULL)
 					odd_list = odd_end = temp;
-				else{
+				else{ 
 					odd_end -> next = temp;
 					odd_end = temp;	
 				}
 			}
+			temp = temp -> next;
 		}	
 	}
 	display(head);
