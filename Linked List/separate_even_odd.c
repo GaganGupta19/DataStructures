@@ -31,7 +31,8 @@ int separate_even_odds(struct node* head){
 			temp = temp -> next;
 		}	
 	}
-	display(head);
+	even_end -> next = odd_list;
+	display(even_list);
 	return 1;
 }
 
