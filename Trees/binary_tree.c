@@ -33,7 +33,7 @@ int main(){
 	root = createnode(1);
 	root -> left = createnode(2);
 	root -> right = createnode(3);
-	//preorder(root);
+	preorder(root);
 	postorder(root);
 	free(root);
 	return 0;
