@@ -20,12 +20,21 @@ void preorder(struct node* root){
 	}
 }
 
+void postorder(struct node* root){
+	if(root){
+		preorder(root->left);
+		preorder(root->right);
+		printf("\n%d", root->key);
+	}
+}
+
 int main(){
 	struct node* root = NULL;
 	root = createnode(1);
 	root -> left = createnode(2);
 	root -> right = createnode(3);
-	preorder(root);
+	//preorder(root);
+	postorder(root);
 	free(root);
 	return 0;
 }
