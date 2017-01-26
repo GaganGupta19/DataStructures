@@ -50,7 +50,7 @@ void inorder(struct node* root){
 }
 
 int main(){
-	struct node* root = NULL, *temp;
+	struct node* root = NULL;
 	int choice, value;
 
 	printf("\nEnter the root node : ");
@@ -91,6 +91,7 @@ int main(){
 				break;
 		}
 	}
+	
 	free(root);
 	return 0;
 }
