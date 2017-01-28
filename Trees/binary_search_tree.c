@@ -1,6 +1,14 @@
 #include<stdlib.h>
 #include<stdio.h>
 
+/*
+Insertion
+Traversal
+	Inorder
+	Preorder
+	Postorder
+*/
+
 struct node{
 	int key;
 	struct node *left, *right;
